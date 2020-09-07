@@ -1,12 +1,13 @@
 #READ AND FORMAT DATA
 data<-read.delim('testweek1.txt', sep = ';', stringsAsFactors = FALSE)
 data$Date<-as.Date(data$Date, '%d/%m/%Y')
-data<-subset(data, data$Date >= as.Date('2007-02-01') & data$Date <= as.Date('2007-02-02' ))
+df<-subset(data, data$Date >= as.Date('2007-02-01') & data$Date <= as.Date('2007-02-02' ))
 
 # PLOT 1
 df$Time<-strptime(df$Time, format='%H:%M:%S')
 df$hour<-as.numeric(format(df$Time, format='%H'))
 df[,3]<-as.numeric(df[,3])
+hist(df[,3], main=’Global Active Power’, xlab=’Global Active Power (klw)’, col=’red’)
 
 # PLOT 2
 df$Wday<-paste(df$Date, df$Time, sep=" ")
